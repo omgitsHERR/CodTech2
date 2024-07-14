@@ -1,0 +1,68 @@
+//Admin class
+class Admin{
+    Scanner sc=new Scanner(System.in);
+    ArrayList <Book> books =new ArrayList<Book>();
+    ArrayList<Customer> SetCustomer=new ArrayList<Customer>();
+    void Addbook(){
+        System.out.println("Enter book name: ");
+        String book_name=sc.next();
+        System.out.println("Enter author name: ");
+        String author_name=sc.next();
+        System.out.println("Enter year of publication: ");
+        int publication_year=sc.nextInt();
+        System.out.println("Enter price for book: ");
+        int price=sc.nextInt();
+
+        Book b1=new Book(book_name,author_name,publication_year,price);
+        books.add(b1);
+        System.out.println("Successfully added");
+    }
+    void Viewbook(){
+        for(Book b:books){
+            System.out.println("Book Name: "+b.title);
+            System.out.println("Author Name: "+b.author);
+            System.out.println("Year of publication: "+b.year);
+            System.out.println("Price of the book: "+b.price);
+        }
+    }
+    void Removebook(){
+        int in=0;
+        System.out.println("Enter book name to delete : ");
+        String bname=sc.next();
+        for(Book b:books){
+            if(b.title.equals(bname))
+                in=books.indexOf(b);
+
+            }
+        }
+        books.remove(in);
+        System.out.println("Book Removed");
+        System.out.println();
+    }
+    void ViewCustomers(ArrayList<Customer> Customers){
+        int num=1;
+        SetCustomer=Customers;
+        for(Customer c:SetCustomer){
+            System.out.println(num+" Name: " + c.name );
+            System.out.println(" Adress: " + c.address );
+            num+=1;
+            System.out.println();
+        }
+        System.out.println();
+    }
+    void RemoveCustomer(){
+        String name;
+        System.out.println("Enter the name of the customer to be remoed: ");
+        name=sc.next();
+        int in=0;
+        for(Customer c: SetCustomer){
+            if(c.name.equals(name)){
+                in=SetCustomer.indexOf(c);
+
+            }
+        }
+        SetCustomer.remove(in);
+        System.out.println("Customer Removed");
+        System.out.println();
+    }
+}
