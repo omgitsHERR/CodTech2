@@ -1,0 +1,104 @@
+class Customer{
+    Scanner sc=new Scanner(System.in);
+    String name;
+    String address;
+    ArrayList<Book> mainset;
+    ArrayList<Book> cart=new ArrayList<Book>();
+    Customer(String name,ArrayList<Book> mainset){
+        this.name=name;
+        this.mainset=mainset;
+    }
+    public void searchBooks(String keyword) {
+        boolean found = false;
+        for (Book book : mainset) {
+            if (book.title.contains(keyword) || book.author.contains(keyword)) {
+                System.out.println("Name: " + book.title );
+                System.out.println("Author: " + book.author );
+                System.out.println("Year: " + book.year );
+                System.out.println("Price: " + book.price );
+                found = true;
+            }
+        }
+        if (!found) {
+            System.out.println("No books found matching the keyword: " + keyword);
+        }
+    }
+    void ViewBooks(){
+        for(Book b:mainset){
+            System.out.println("Name: " + b.title );
+            System.out.println("Author: " + b.author );
+            System.out.println("Year: " + b.year );
+            System.out.println("Price: " + b.price );
+        }
+        System.out.println();
+    }
+    void AddtoCart(){
+        String cartProduct;
+        int quantity;
+        int flag=0,i;
+        System.out.println("ENTER THE BOOK NAME TO ADD TO CART: ");
+        cartProduct=sc.next();
+        System.out.println("Enter the quantity: ");
+        quantity=sc.nextInt();
+        for(Book b:mainset){
+            if(b.title.equals(cartProduct)){
+                for(i=0;i<quantity;i++){
+                    cart.add(b);
+                    flag=1;
+                }
+            }
+        }
+        if(flag==1){
+            System.out.println("Book added to cart");
+        }
+        else if(flag==0){
+            System.out.println("Book not available");
+        }
+        System.out.println();
+    }
+    void ViewCart(){
+        int num=1;
+        for(Book b:cart){
+            System.out.println(num+" Name: " + b.title );
+            System.out.println("  Price: " + b.price );
+            System.out.println("  Author: " + b.author );
+            System.out.println("  Year: " + b.year );
+            num=num+1;
+        }
+        System.out.println();
+    }
+    void RemovefromCart(){
+        String name;
+        int in=0;
+        System.out.println("Enter the name of the book to be removed: ");
+        name=sc.next();
+        for(Book b:cart){
+            if(b.title.equals(name)){
+                in=cart.indexOf(b);
+            }
+        }
+        cart.remove(in);
+        System.out.println("Book removed");
+        System.out.println();
+    }
+    void ViewBill(){
+        int num=1;
+        int bill=0;
+        for(Book b:cart){
+            System.out.println(num+" Name: " + b.title );
+            bill+=b.price;
+            num+=1;
+        }
+        System.out.println("Your total bill amount is: Rs"+bill);
+        System.out.println();
+
+    }
+    void PlaceOrder(){
+        ViewBill();
+        System.out.println("ENTER YOUR ADDRESS: ");
+        address=sc.next();
+        System.out.println();
+        System.out.println("Your order is placed! ");
+    }
+
+}
