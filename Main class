@@ -1,0 +1,141 @@
+public class BookStore {
+    public static void main(String[] args) {
+        ArrayList<Customer> Customers=new ArrayList<Customer>();
+        Admin a1=new Admin();
+        Scanner scan=new Scanner(System.in);
+        String name;
+        String keyword;
+        System.out.println("Admin          or          Customer");
+        System.out.println();
+        System.out.println("Exit");
+        System.out.println();
+        System.out.println("Enter your Choice: ");
+        String user=scan.next();
+        System.out.println();
+        ArrayList<Book> mainset=new ArrayList<Book>();
+        if(user.equals("exit")|| user.equals("Exit")){
+            System.out.println("Thank you");
+        }
+        else{
+            while(user!="Exit" || user!="exit"){
+                if(user.equals("Admin") || user.equals("admin") ){
+                    String ch="Y";
+                    int choice;
+                    while(ch.equals("Y") || ch.equals("y")){
+                        System.out.println("1.ADD BOOK \n2.VIEW BOOK\n3.REMOVE BOOK \n4.VIEW CUSTOMERS\n5.DELETE CUSTOMERS\n6.EXIT\n");
+                        System.out.println("ENTER YOUR CHOICE: ");
+                        choice=scan.nextInt();
+                        if(choice==1){
+                            a1.Addbook();
+                        }
+                        else if(choice==2){
+                            a1.Viewbook();
+                        }
+                        else if(choice==3){
+                            a1.Removebook();
+                        }
+                        else if(choice==4){
+                            a1.ViewCustomers(Customers);
+                        }
+                        else if(choice==5){
+                            a1.RemoveCustomer();
+                        }
+                        else if(choice==6){
+                            System.out.println("Admin          or          Customer");
+                            System.out.println("Exit");
+                            System.out.println("Enter your Choice: ");
+                            user=scan.next();
+                            if(user.equals("Exit") || user.equals("exit")){
+                                break;
+                            }
+
+
+                        }
+                        if(choice!=6){
+                            System.out.println("Do you want to continue? Y/N ");
+                            ch=scan.next();
+                            if(ch.equals("n") || ch.equals("N")){
+                                System.out.println("Admin          or          Customer");
+                                System.out.println("Exit");
+                                System.out.println("Enter your Choice: ");
+                                user=scan.next();
+                                if(user.equals("Exit") || user.equals("exit")){
+                                    break;
+                                }
+                            }
+                        }
+
+
+                    }
+                    mainset=a1.books;
+                }
+                else if(user.equals("Customer") || user.equals("customer")){
+                    System.out.println("Enter your name: ");
+                    name=scan.next();
+                    System.out.println();
+                    Customer c1=new Customer(name, mainset);
+                    Customers.add(c1);
+                    String ch="Y";
+                    int choice;
+                    while(ch.equals("Y") || ch.equals("y")){
+                        System.out.println("1.VIEW BOOKS \n2.SEARCH BOOKS \n3.ADD BOOKS TO CART\n4.REMOVE BOOKS FROM CART \n5.VIEW CART\n6.VIEW BILL\n7.PLACE ORDER\n8.EXIT\n");
+                        System.out.println("ENTER YOUR CHOICE: ");
+                        choice=scan.nextInt();
+                        if(choice==1){
+                            c1.ViewBooks();
+                        }
+                        else if(choice==2){
+                            keyword=scan.next();
+                            c1.searchBooks(keyword);
+                        }
+                        else if(choice==3){
+                            c1.AddtoCart();
+                        }
+                        else if(choice==4){
+                            c1.RemovefromCart();
+                        }
+                        else if(choice==5){
+                            c1.ViewCart();
+                        }
+                        else if(choice==6){
+                            c1.ViewBill();
+                        }
+                        else if(choice==7){
+                            c1.PlaceOrder();
+                        }
+                        else if(choice==8){
+                            System.out.println("Admin          or          Customer");
+                            System.out.println("Exit");
+                            System.out.println("Enter your Choice: ");
+                            user=scan.next();
+                            if(user.equals("Exit") || user.equals("exit")){
+                                break;
+                            }
+
+                        }
+                        if(choice!=8){
+                            System.out.println("Do you want to continue? Y/N ");
+                            ch=scan.next();
+                            if(ch.equals("n") || ch.equals("N")){
+                                System.out.println("Admin          or          Customer");
+                                System.out.println("Exit");
+                                System.out.println("Enter your Choice: ");
+                                user=scan.next();
+                                if(user.equals("Exit") || user.equals("exit")){
+                                    break;
+                                }
+                            }
+                        }
+                    }
+
+                }
+                else{
+                    break;
+                }
+            }
+        }
+
+
+        scan.close();
+    }
+}
